@@ -273,6 +273,8 @@ a { color: inherit; }
 
 /* --------------------------------------------------------------------------
    Hero
+   Mobile: the photo shows whole (3:2, no crop) with the copy beneath it.
+   Desktop: the photo fills the band and the copy sits over its left side.
    -------------------------------------------------------------------------- */
 
 .hero {
@@ -283,25 +285,16 @@ a { color: inherit; }
 }
 .hero__img {
   width: 100%;
-  height: 100%;
-  min-height: 560px;
-  max-height: 82vh;
+  aspect-ratio: 3 / 2;
   object-fit: cover;
-  object-position: 72% 50%;
-}
-.hero::after {
-  content: "";
-  position: absolute; inset: 0;
-  background:
-    linear-gradient(to top, rgba(29,26,21,.82) 0%, rgba(29,26,21,.35) 45%, rgba(29,26,21,0) 70%);
+  object-position: 50% 50%;
 }
 .hero__inner {
-  position: absolute;
-  left: 0; right: 0; bottom: 0;
+  position: relative;
   z-index: 1;
   max-width: var(--container);
   margin-inline: auto;
-  padding: 0 var(--gutter) 36px;
+  padding: 28px var(--gutter) 36px;
 }
 .hero__title {
   font-family: var(--font-display);
@@ -328,19 +321,27 @@ a { color: inherit; }
 .hero .button--ghost { color: var(--white); border-color: var(--white); }
 .hero .button--ghost:hover { background: var(--white); color: var(--ink); }
 
-@media (min-width: 768px) {
-  .hero__img { min-height: 640px; }
+@media (min-width: 900px) {
+  .hero__img {
+    aspect-ratio: auto;
+    height: 100%;
+    min-height: 640px;
+    max-height: 88vh;
+  }
   .hero::after {
+    content: "";
+    position: absolute; inset: 0;
     background:
       linear-gradient(to right, rgba(29,26,21,.82) 0%, rgba(29,26,21,.55) 36%, rgba(29,26,21,0) 60%),
       linear-gradient(to top, rgba(29,26,21,.5) 0%, rgba(29,26,21,0) 40%);
   }
   .hero__inner {
-    top: 0;
+    position: absolute;
+    inset: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding-bottom: 0;
+    padding-block: 0;
   }
   .hero__title, .hero__text, .hero__actions { max-width: min(46%, 640px); }
   .hero__text { font-size: 1.1875rem; }
