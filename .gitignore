@@ -1,0 +1,6 @@
+# Source photos and reference material stay local; the site uses the crops in assets/
+*_n.jpg
+screencapture-*.png
+CLAUDEwebdesign copy.md
+.DS_Store
+.netlify/
